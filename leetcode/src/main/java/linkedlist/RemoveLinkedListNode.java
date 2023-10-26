@@ -4,6 +4,7 @@ package linkedlist;
  * author: chiou
  * createTime: 2023/9/15
  * description: 移除链表元素
+ * 解法：设置虚拟头节点、  排除头节点情况，然后直接牵手后面的后面
  */
 public class RemoveLinkedListNode {
     /**
@@ -51,6 +52,40 @@ public class RemoveLinkedListNode {
             curr = curr.next;
         }
         return dummy.next;
+    }
+
+    public ListNode removeElements23(ListNode head, int val) {
+        if (head == null) {
+            return head;
+        }
+        ListNode dummy = new ListNode(-1, head);
+        ListNode pre = dummy;
+        ListNode cur = head;
+        while (cur != null) {
+            if (cur.val == val) {
+                pre.next = cur.next;
+            } else {
+                pre = cur;
+            }
+            cur = cur.next;
+        }
+        return dummy.next;
+    }
+
+    public ListNode removeElements234(ListNode head, int val) {
+        //删除头节点重复情况
+        while (head != null && head.val == val) {
+            head = head.next;
+        }
+        //牵手后面
+        ListNode cur = head;
+        while (cur != null) {
+            while (cur.next != null && cur.next.val == val) {
+                cur.next = cur.next.next;
+            }
+            cur = cur.next;
+        }
+        return head;
     }
 
     public static void main(String[] args) {
