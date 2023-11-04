@@ -1,7 +1,6 @@
 package icu.chiou;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * author: chiou
@@ -18,7 +17,6 @@ public class Main {
         for (int i = 0; i < 16; i++) {
             list.add(i);
         }
-        new HashMap<>()
     }
 
     public static int f(int value) {

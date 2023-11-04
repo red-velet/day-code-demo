@@ -27,6 +27,7 @@ public class ReverseList {
         if (head == null) {
             return head;
         }
+        //1 -> 2 -> 3 ->4
         if (head.next == null) {
             return head.next;
         }
@@ -35,4 +36,22 @@ public class ReverseList {
         head.next = null;
         return last;
     }
+
+    public ListNode test2(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode pre = null;
+        ListNode cur = head;
+        //1 -> 2 -> 3 ->4
+        while (cur != null) {
+            ListNode tmp = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = tmp;
+        }
+        return pre;
+    }
+
+
 }
