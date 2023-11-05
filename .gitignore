@@ -1,0 +1,18 @@
+# Ignore build directory
+build/
+
+# Ignore compiled Java classes
+*.class
+
+# Ignore IDE configuration files
+.idea/
+
+# Ignore log files
+*.log
+
+# Exclude specific file
+!src/main/java/Example.java
+
+# Exclude files in a specific directory
+src/main/resources/secret/
+
