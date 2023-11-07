@@ -78,12 +78,30 @@ public class ReverseString {
         return builder.toString().trim();
     }
 
+    //左旋转字符串
+    public String dynamicPassword(String password, int target) {
+        String back = password.substring(0, target);
+        String pre = password.substring(target, password.length());
+        return pre + back;
+    }
+
+    //解法二
+    public String dynamicPassword2(String password, int target) {
+        char[] charArray = password.toCharArray();
+        reverse(charArray, 0, charArray.length - 1);
+        reverse(charArray, 0, charArray.length - 1 - target);
+        reverse(charArray, charArray.length - target, charArray.length - 1);
+        return new String(charArray);
+    }
 
     public static void main(String[] args) {
         String res = new ReverseString().reverseStr("abcdefg", 2);
         System.out.println("res = " + res);
 
         res = new ReverseString().reverseWords("hello,i am mi  fans  ");
+        System.out.println("res = " + res);
+
+        res = new ReverseString().dynamicPassword("abcdefg", 3);
         System.out.println("res = " + res);
     }
 }
