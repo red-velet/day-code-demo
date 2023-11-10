@@ -1,8 +1,6 @@
 package stackandqueue;
 
-import java.util.ArrayDeque;
-import java.util.Arrays;
-import java.util.Deque;
+import java.util.*;
 
 /**
  * author: chiou
@@ -27,6 +25,32 @@ public class SlidingWindow {
             if (i >= k - 1) {
                 res[i - k + 1] = nums[deque.getFirst()];
             }
+        }
+        return res;
+    }
+
+    //前k个高频元素
+    public int[] topKFrequent(int[] nums, int k) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        //记录每个元素值及其频率
+        for (int num : nums) {
+            map.put(num, map.getOrDefault(num, 0) + 1);
+        }
+        int[] res = new int[k];
+        ArrayDeque<Integer> deque = new ArrayDeque<>();
+        Queue<Map.Entry<Integer, Integer>> priority = new PriorityQueue<>((a, b) -> a.getValue() - b.getValue());
+        Iterator<Map.Entry<Integer, Integer>> iterator = map.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<Integer, Integer> entry = iterator.next();
+            priority.offer(entry);
+            if (priority.size() > k) {
+                priority.poll();
+            }
+        }
+        int index = 0;
+        while (!priority.isEmpty()) {
+            Integer key = priority.poll().getKey();
+            res[index++] = key;
         }
         return res;
     }
