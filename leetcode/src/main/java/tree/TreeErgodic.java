@@ -8,7 +8,7 @@ import java.util.Stack;
 /**
  * author: chiou
  * createTime: 2023/11/2
- * description: 二叉树的前中后序遍历
+ * description: 二叉树的前中后序遍历-深度优先搜索
  */
 public class TreeErgodic {
     //前序

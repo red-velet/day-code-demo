@@ -37,7 +37,7 @@ public class SlidingWindow {
             map.put(num, map.getOrDefault(num, 0) + 1);
         }
         int[] res = new int[k];
-        ArrayDeque<Integer> deque = new ArrayDeque<>();
+        //优先级队列进行排序
         Queue<Map.Entry<Integer, Integer>> priority = new PriorityQueue<>((a, b) -> a.getValue() - b.getValue());
         Iterator<Map.Entry<Integer, Integer>> iterator = map.entrySet().iterator();
         while (iterator.hasNext()) {
