@@ -166,21 +166,21 @@ public class TreeErgodic2 {
     }
 
     //填充每个节点的下一个右指针
-    public Node connect(Node root) {
+    public Node2 connect(Node2 root) {
         if (root == null) {
             return root;
         }
-        Node dummy = root;
+        Node2 dummy = root;
         dummy.next = null;
         //入队
-        Queue<Node> queue = new ArrayDeque<>();
+        Queue<Node2> queue = new ArrayDeque<>();
         queue.add(root);
         while (!queue.isEmpty()) {
             //设置虚拟头节点
-            Node head = new Node();
+            Node2 head = new Node2();
             int size = queue.size();
             while (size-- > 0) {
-                Node node = queue.poll();
+                Node2 node = queue.poll();
                 head.next = node;
                 head = node;
                 if (node.left != null) {
@@ -263,20 +263,20 @@ public class TreeErgodic2 {
 
 }
 
-class Node {
+class Node2 {
     public int val;
-    public Node left;
-    public Node right;
-    public Node next;
+    public Node2 left;
+    public Node2 right;
+    public Node2 next;
 
-    public Node() {
+    public Node2() {
     }
 
-    public Node(int _val) {
+    public Node2(int _val) {
         val = _val;
     }
 
-    public Node(int _val, Node _left, Node _right, Node _next) {
+    public Node2(int _val, Node2 _left, Node2 _right, Node2 _next) {
         val = _val;
         left = _left;
         right = _right;
