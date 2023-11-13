@@ -261,25 +261,74 @@ public class TreeErgodic2 {
         System.out.println("integers1 = " + integers1);
     }
 
-}
-
-class Node2 {
-    public int val;
-    public Node2 left;
-    public Node2 right;
-    public Node2 next;
-
-    public Node2() {
+    //完全二叉树节点的个数
+    public int countNodes(TreeNode root) {
+        int count = 0;
+        if (root == null) {
+            return count;
+        }
+        Queue<TreeNode> queue = new ArrayDeque<>();
+        queue.add(root);
+        count++;
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            while (size-- > 0) {
+                TreeNode node = queue.poll();
+                if (node.left != null) {
+                    queue.add(node.left);
+                    count++;
+                }
+                if (node.right != null) {
+                    queue.add(node.right);
+                    count++;
+                }
+            }
+        }
+        return count;
     }
 
-    public Node2(int _val) {
-        val = _val;
+    //平衡二叉树的判断
+    public boolean isBalanced(TreeNode root) {
+        return check(root) != -1;
     }
 
-    public Node2(int _val, Node2 _left, Node2 _right, Node2 _next) {
-        val = _val;
-        left = _left;
-        right = _right;
-        next = _next;
+    private int check(TreeNode node) {
+        if (node == null) {
+            return 0;
+        }
+        int l = check(node.left);
+        if (l == -1) {
+            return -1;
+        }
+        int r = check(node.right);
+        if (r == -1) {
+            return -1;
+        }
+        if (Math.abs(r - l) > 1) {
+            return -1;
+
+        }
+        return Math.max(l, r) + 1;
+
     }
-}
+
+    class Node2 {
+        public int val;
+        public Node2 left;
+        public Node2 right;
+        public Node2 next;
+
+        public Node2() {
+        }
+
+        public Node2(int _val) {
+            val = _val;
+        }
+
+        public Node2(int _val, Node2 _left, Node2 _right, Node2 _next) {
+            val = _val;
+            left = _left;
+            right = _right;
+            next = _next;
+        }
+    }
