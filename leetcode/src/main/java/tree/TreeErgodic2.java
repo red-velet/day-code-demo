@@ -332,3 +332,4 @@ public class TreeErgodic2 {
             next = _next;
         }
     }
+}
