@@ -155,4 +155,46 @@ public class BSTSearch {
         //右
         list2(curr.right);
     }
+
+    //二叉树的最近公共祖先
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        //情况1：当前节点为空，当前节点是p/q，那么当前节点就是最近公共祖先
+        if (root == null || root == p || root == q) {
+            return root;
+        }
+        //情况2：当前节点不为空，且不为p/q，递归查找左子树，递归查找右子树
+        TreeNode left = lowestCommonAncestor(root.left, p, q);
+        TreeNode right = lowestCommonAncestor(root.right, p, q);
+        //左右子树都有p/q，那么当前节点为最近公共祖先，p/q存在左右子树中
+        if (left != null && right != null) {
+            return root;
+        }
+        //右节点为空，左节点不为空，p和q出现在当前节点的左子树，当前节点查找到的第一个左为最近公共祖先
+        if (left != null) {
+            return left;
+        }
+        //左节点为空，右节点不为空，p和q出现在当前节点的左子树，当前节点查找到的第一个左为最近公共祖先
+        return right;
+    }
+
+    //二叉搜索树的最近公共祖先
+    public TreeNode lowestCommonAncestorSearch(TreeNode root, TreeNode p, TreeNode q) {
+        // 获取当前节点的值
+        int currVal = root.val;
+
+        // 如果当前节点值大于 p 和 q 的值
+        if (currVal > p.val && currVal > q.val) {
+            // p 和 q 都在当前节点的左子树中，向左子树递归查找
+            return lowestCommonAncestorSearch(root.left, p, q);
+        }
+
+        // 如果当前节点值小于 p 和 q 的值
+        if (currVal < p.val && currVal < q.val) {
+            // p 和 q 都在当前节点的右子树中，向右子树递归查找
+            return lowestCommonAncestorSearch(root.right, p, q);
+        }
+        // 其他情况，当前节点就是最近公共祖先
+        return root;
+    }
+
 }
