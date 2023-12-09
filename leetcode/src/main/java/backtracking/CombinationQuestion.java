@@ -128,6 +128,64 @@ public class CombinationQuestion {
         }
     }
 
+    //电话号码字母组合
+    public List<String> letterCombinations(String digits) {
+        List<String> result = new ArrayList<>();
+        if (digits != null && !"".equals(digits)) {
+            backtrackingLetterCombinations(result, digits, new StringBuilder(), 0);
+        }
+        return result;
+    }
+
+    String[] str = new String[]{"", "", "abc", "def", "ghi", "jkl", "mno", "pars", "tuv", "wxyz"};
+
+    private void backtrackingLetterCombinations(List<String> result, String digits, StringBuilder path, int numIndex) {
+        if (numIndex == digits.length()) {
+            result.add(new String(path));
+            return;
+        }
+        int digit = digits.charAt(numIndex) - '0';
+        String letter = str[digit];
+        for (int i = 0; i < letter.length(); i++) {
+            path.append(letter.charAt(i));
+            backtrackingLetterCombinations(result, digits, path, numIndex + 1);
+            path.deleteCharAt(path.length() - 1);
+        }
+    }
+
+    //分割回文串
+    public List<List<String>> partition(String s) {
+        List<List<String>> result = new ArrayList<>();
+        List<String> path = new ArrayList<>();
+        backtrackingPartition(result, path, s, 0);
+        return result;
+    }
+
+    private void backtrackingPartition(List<List<String>> result, List<String> path, String s, int startIndex) {
+        if (startIndex == s.length()) {
+            result.add(new ArrayList<>(path));
+            return;
+        }
+        for (int i = startIndex; i < s.length(); i++) {
+            if (isHuiWen(s, startIndex, i)) {
+                path.add(s.substring(startIndex, i + 1));
+            } else {
+                continue;
+            }
+            backtrackingPartition(result, path, s, i + 1);
+            path.remove(path.size() - 1);
+        }
+    }
+
+    private boolean isHuiWen(String s, int start, int end) {
+        for (int i = start, j = end; i < j; i++, j--) {
+            if (s.charAt(i) != s.charAt(j)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public static void main(String[] args) {
         CombinationQuestion main = new CombinationQuestion();
         List<List<Integer>> lists = main.combinationSum2(new int[]{2, 5, 2, 1, 2}, 4);
