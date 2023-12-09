@@ -186,6 +186,52 @@ public class CombinationQuestion {
         return true;
     }
 
+    //复原ip地址
+    public List<String> restoreIpAddresses(String s) {
+        List<String> result = new ArrayList<>();
+        backtrackingRestoreIpAddresses(result, new StringBuilder(s), 0, 0);
+        return result;
+    }
+
+    private void backtrackingRestoreIpAddresses(List<String> result, StringBuilder path, int pointNum, int startIndex) {
+        if (pointNum == 3) {
+            if (isValidIpNum(path, startIndex, path.length() - 1)) {
+                result.add(path.toString());
+            }
+            return;
+        }
+        for (int i = startIndex; i < path.length(); i++) {
+            if (isValidIpNum(path, startIndex, i)) {
+                path.insert(i + 1, ".");
+                backtrackingRestoreIpAddresses(result, path, pointNum + 1, i + 2);
+                path.deleteCharAt(i + 1);
+            } else {
+                break;
+            }
+        }
+    }
+
+    private boolean isValidIpNum(StringBuilder s, int start, int end) {
+        //范围要正确
+        if (start > end) {
+            return false;
+        }
+        //不能0开头
+        if (s.charAt(start) == '0' && start != end) {
+            return false;
+        }
+        //数字范围要正确
+        int num = 0;
+        for (int i = start; i <= end; i++) {
+            int digit = s.charAt(i) - '0';
+            num = num * 10 + digit;
+            if (num > 255) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public static void main(String[] args) {
         CombinationQuestion main = new CombinationQuestion();
         List<List<Integer>> lists = main.combinationSum2(new int[]{2, 5, 2, 1, 2}, 4);
