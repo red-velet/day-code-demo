@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="demo" />
         <module name="leetcode" />
+        <module name="code-review" />
       </profile>
     </annotationProcessing>
   </component>
