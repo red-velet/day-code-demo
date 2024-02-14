@@ -62,4 +62,15 @@ public class Day_24_02_01 {
         }
         return result;
     }
+
+    public static void main(String[] args) {
+        boolean flag = true;
+        System.out.println(flag);
+        int age = 18;
+        if (age == 18) {
+            System.out.println("18碎");
+        } else {
+            System.out.println("18碎xxxxx");
+        }
+    }
 }
